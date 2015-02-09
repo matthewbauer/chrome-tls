@@ -1,0 +1,18 @@
+{
+	"name": "chrome-tls",
+	"version": "1.0.0",
+	"description": "Use Node's `tls` in Chrome Apps",
+	"author": "Matthew Bauer <mjbauer95@gmail.com> (http://matthewbauer.us)",
+	"devDependencies": {
+		"inherits": "^2.0.1",
+		"node-forge": "git://github.com/matthewbauer/forge.git#browserify2",
+		"vinyl-source-stream": "^1.0.0"
+	},
+	"homepage": "https://github.com/matthewbauer/chrome-tls",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/matthewbauer/chrome-tls.git"
+	},
+	"main": "tls.js"
+}
