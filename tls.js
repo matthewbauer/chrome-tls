@@ -93,10 +93,10 @@ function TLSSocket(options) {
 
 			// send TLS data over socket
 			self._socket.write(bytes, 'binary', function(err) {
-			if (err) {
-				self.emit('error', err);
-			}
-		  });
+				if (err) {
+					self.emit('error', err);
+				}
+			});
 		},
 		dataReady: function(conn) {
 			// encrypted data received from the socket is decrypted
@@ -111,9 +111,13 @@ function TLSSocket(options) {
 		}
 	});
 
-	self._socket.on('data', function(chunk) {
-	  self._tls.process(chunk.toString('binary'));
-	});
+	self.ondata = function(chunk) {
+		self._tls.process(chunk.toString('binary'));
+	};
+
+	self._socket.on('data', self.ondata);
+
+	self.on('close', self.end);
 
 	self._socket._onConnected(function() {
 		self._tls.handshake();
@@ -140,9 +144,9 @@ TLSSocket.prototype._write = function (buffer, encoding, callback) {
 	callback();
 };
 
-TLSSocket.prototype.destroy = function (exception) {
-	var self = this;
-	return self._socket.destroy(exception);
+TLSSocket.prototype.end = function(exception) {
+	this._socket.removeListener('data', this.ondata);
+	this._socket.destroy(exception);
 };
 
 // send all TCP socket calls to this._socket
