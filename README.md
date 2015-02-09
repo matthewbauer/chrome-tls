@@ -5,7 +5,7 @@ Use Node's `tls` in Chrome Apps. Based on similar packages such as tcp-socket, n
 
 ## Installing
 ```
-npm install --save-dev chrome-net git://github.com/matthewbauer/chrome-tls.git
+npm install --save-dev chrome-net matthewbauer/chrome-tls
 ```
 
 This will make `chrome-tls` available to require. To set this as a builtin, you will need to set browserify's builtins options. Below are some example configs for use with Grunt and Gulp.
